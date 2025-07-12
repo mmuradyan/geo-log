@@ -1,38 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #f8f9fa;
 }
 
-.App-link {
-  color: #61dafb;
+.main-content {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 80px); /* Adjust based on control panel height */
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.map-panel {
+  flex: 1;
+  min-width: 0; /* Allow flexbox to shrink */
+  border-right: 1px solid #dee2e6;
+}
+
+.table-panel {
+  flex: 1;
+  min-width: 0; /* Allow flexbox to shrink */
+  background-color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    height: calc(100vh - 100px); /* Adjust for mobile control panel */
   }
-  to {
-    transform: rotate(360deg);
+  
+  .map-panel {
+    flex: 1;
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    min-height: 40vh;
   }
+  
+  .table-panel {
+    flex: 1;
+    min-height: 40vh;
+    overflow: auto;
+  }
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+  .App {
+    /* Add safe area insets for notched devices */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Leaflet map container fix */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
 }
